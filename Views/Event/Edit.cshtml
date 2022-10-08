@@ -1,0 +1,95 @@
+﻿@model ReservationProject.ViewModels.EventViewModel
+
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<style type="text/css">
+    .hidden {
+        display: none;
+    }
+</style>
+
+<h1>Edit Event</h1>
+
+<h4>Event</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EventID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantityofPerson" class="control-label"></label>
+                <input asp-for="QuantityofPerson" class="form-control" />
+                <span asp-validation-for="QuantityofPerson" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Motive" class="control-label"></label>
+                <input asp-for="Motive" class="form-control" />
+                <span asp-validation-for="Motive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Location</label>
+                <select asp-for="LocationID" class="form-control" asp-items="@Model.Locations"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Service Team</label>
+                <select asp-for="ServiceID" class="form-control" asp-items="@Model.Services"></select>
+            </div>
+            <div class="form-group">
+                <select asp-for="Type" id="dropdown" class="form-select" aria-label="Event type">
+                    <option value="1">Private</option>
+                    <option value="2">Public</option>
+                </select>
+            </div>
+            <div id="private-event" class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div id="public-event" class="form-group hidden">
+                <label asp-for="ArtShow" class="control-label"></label>
+                <input asp-for="ArtShow" class="form-control" />
+                <span asp-validation-for="ArtShow" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script type="text/javascript">
+        document.querySelector("#dropdown").addEventListener("change", function (e) {;
+            const private = document.querySelector("#private-event");
+            const public = document.querySelector("#public-event");
+
+            if (e.target.value === "1") {
+                private.classList.remove("hidden");
+                public.classList.add("hidden");
+
+            }
+            else if (e.target.value === "2") {
+                private.classList.add("hidden");
+                public.classList.remove("hidden");
+            }
+            else {
+                private.classList.add("hidden");
+                public.classList.add("hidden");
+            }
+        });
+</script>
+}

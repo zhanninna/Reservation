@@ -1,0 +1,92 @@
+﻿@model ReservationProject.ViewModels.LocationViewModel
+
+@{
+    ViewData["Title"] = "Location Details";
+}
+
+<h1>Details of location</h1>
+
+<div>
+    <h4>Location</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Alkohols)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Alkohols)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LegalProtection)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LegalProtection)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cuisine)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cuisine)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Decoration)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Decoration)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KindOfRoom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KindOfRoom)
+        </dd>
+    </dl>
+</div>
+<h3>Events for selected location</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Quantity of People
+            </th>
+            <th>
+                Motive
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Events)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityofPerson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Motive)
+                </td>
+                <td>
+                    <a asp-controller="Event" asp-action="Details" asp-route-id="@item.EventID">Details</a>                
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

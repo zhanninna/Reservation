@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ReservationProject.ViewModels.LocationViewModel>
+
+@{
+    ViewData["Title"] = "Locations";
+}
+
+<h1>Locations</h1>
+
+<p>
+    <a asp-action="Add">Add Location</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alkohols)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LegalProtection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cuisine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Decoration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KindOfRoom)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @if (item.Type == 1)
+                {
+                    @Html.DisplayFor(modelItem => item.Alkohols)
+                }
+                else
+                {
+                    @Html.Raw("N/A")
+                }
+            </td>
+            <td>
+                @if (item.Type == 2)
+                {
+                    @Html.DisplayFor(modelItem => item.LegalProtection)
+                }
+                else
+                {
+                    @Html.Raw("N/A")
+                }
+            </td>
+            <td>
+                @if (item.Type == 3)
+                {
+                    @Html.DisplayFor(modelItem => item.Cuisine)
+                }
+                else
+                {
+                    @Html.Raw("N/A")
+                }
+            </td>
+            <td>
+                @if (item.Type == 3)
+                {
+                    @Html.DisplayFor(modelItem => item.Decoration)
+                }
+                else
+                {
+                    @Html.Raw("N/A")
+                }
+            </td>
+            <td>
+                @if (item.Type == 3)
+                {
+                    @Html.DisplayFor(modelItem => item.KindOfRoom)
+                }
+                else
+                {
+                    @Html.Raw("N/A")
+                }
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.LocationID">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

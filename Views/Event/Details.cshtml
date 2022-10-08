@@ -1,0 +1,70 @@
+﻿@model ReservationProject.ViewModels.EventViewModel
+
+@{
+    ViewData["Title"] = "Event Details";
+}
+
+<h1>Event Details</h1>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuantityofPerson)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuantityofPerson)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Motive)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Motive)
+        </dd>
+        <dt class="col-sm-2">
+            @if (@Model.Type == 1)
+            {
+                @Html.DisplayNameFor(model => model.Description)
+            }
+            else
+            {
+                @Html.DisplayNameFor(model => model.ArtShow)
+            }
+        </dt>
+        <dd class="col-sm-10">
+            @if (@Model.Type == 1)
+            {
+                @Html.DisplayFor(model => model.Description)
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.ArtShow)
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location.Address)
+            |
+            <a asp-controller="Location" asp-action="Details" asp-route-id="@Model.Location.LocationID">Details</a>
+        </dd>
+        <dt class="col-sm-2">
+            Service Team
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Service.TeamName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.EventID">Edit</a> |
+    <a asp-action="Index">Back to Events List</a>
+</div>

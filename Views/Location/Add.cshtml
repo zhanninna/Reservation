@@ -1,0 +1,115 @@
+﻿@model ReservationProject.ViewModels.LocationViewModel
+
+@{
+    ViewData["Title"] = "Add Location";
+}
+
+<style type="text/css">
+    .hidden
+    {
+        display: none;
+    }
+</style>
+
+<h1>Add Location</h1>
+
+<h4>Location</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="Type" id="dropdown" class="form-select" aria-label="Location type">
+                    <option value="1">Bar</option>
+                    <option value="2">Park</option>
+                    <option value="3">Restaurant</option>
+                </select>
+            </div>
+            <div id="alkohol-field" class="form-group location-bar">
+                <label asp-for="Alkohols" class="control-label"></label>
+                <input asp-for="Alkohols" class="form-control" />
+                <span asp-validation-for="Alkohols" class="text-danger"></span>
+            </div>
+            <div id="legalprotection-field" class="form-group location-park hidden">
+                <div class="form-check">
+                    <input asp-for="LegalProtection" class="form-check-input" type="checkbox" id="gridCheck">
+                    <label asp-for="LegalProtection" class=" form-check-label" for="gridCheck">
+                        Legal Protection
+                    </label>
+                    <span asp-validation-for="LegalProtection" class="text-danger"></span>
+                </div>
+            </div>
+            <div id="cuisine-field" class="form-group location-restaurant hidden">
+                <label asp-for="Cuisine" class="control-label"></label>
+                <input asp-for="Cuisine" class="form-control" />
+                <span asp-validation-for="Cuisine" class="text-danger"></span>
+            </div>
+            <div id="decoration-field" class="form-group location-restaurant hidden">
+                <label asp-for="Decoration" class="control-label"></label>
+                <input asp-for="Decoration" class="form-control" />
+                <span asp-validation-for="Decoration" class="text-danger"></span>
+            </div>
+            <div id="kindofroom-field" class="form-group location-restaurant hidden">
+                <label asp-for="KindOfRoom" class="control-label"></label>
+                <input asp-for="KindOfRoom" class="form-control" />
+                <span asp-validation-for="KindOfRoom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        document.querySelector("#dropdown").addEventListener("change", function (e) {;
+            const alkohol = document.querySelector("#alkohol-field");
+            const legalprotection = document.querySelector("#legalprotection-field");
+            const cuisine = document.querySelector("#cuisine-field");
+            const decoration = document.querySelector("#decoration-field");
+            const kindofroom = document.querySelector("#kindofroom-field");
+
+            if (e.target.value === "1") {
+                alkohol.classList.remove("hidden");
+                legalprotection.classList.add("hidden");
+                cuisine.classList.add("hidden");
+                decoration.classList.add("hidden");
+                kindofroom.classList.add("hidden");
+            }
+            else if (e.target.value === "2") {
+                legalprotection.classList.remove("hidden");
+                alkohol.classList.add("hidden");
+                cuisine.classList.add("hidden");
+                decoration.classList.add("hidden");
+                kindofroom.classList.add("hidden");
+            }
+            else if (e.target.value === "3") {
+                cuisine.classList.remove("hidden");
+                decoration.classList.remove("hidden");
+                kindofroom.classList.remove("hidden");
+                legalprotection.classList.add("hidden");
+                alkohol.classList.add("hidden");
+            }
+            else {
+                legalprotection.classList.add("hidden");
+                alkohol.classList.add("hidden");
+                cuisine.classList.add("hidden");
+                decoration.classList.add("hidden");
+                kindofroom.classList.add("hidden");
+            }
+        });
+    </script>
+}
